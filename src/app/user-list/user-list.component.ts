@@ -109,8 +109,6 @@ for (var i = 0; i < localusers.length; i++) {
 }
 localStorage.setItem("users", JSON.stringify(localusers));
  this.users = localusers;
-// var fs = require('file-system');
-// fs.writeFile('../../assets/userData.json', this.users)
 }
 
 
