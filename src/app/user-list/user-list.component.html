@@ -1,0 +1,79 @@
+<div class="container-fluid">
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">User</a>
+      <div class="c-flex">
+        <button class="btn btn-outline-dark" (click)="getUserData()">Show User List</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+
+  <!-- Table -->
+ <div *ngIf="users">
+<table class="table  table-hover">
+	<thead>
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">Name</th>
+			<th scope="col">Work</th>
+			<th scope="col">Email</th>
+            <th scope="col">YOB</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr style="cursor: pointer;" *ngFor="let user of users ; index as i" (click)="open(content);onEdit(user) " >
+			<th scope="row">{{ i + 1 }}</th>
+			<td>{{ user.name }}</td>
+			<td>{{ user.work }}</td>
+			<td>{{ user.email  }}</td>
+			<td>{{ user.yob }}</td>
+			<td>{{ user.address }}</td>
+			<td>{{ user.city  }}</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+<!-- modal for updation -->
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">User Profile update</h4>
+		
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formValue">
+			<div class="mb-3">
+                    <input id="name" class="form-control" placeholder="Enter Name" formControlName="name"/>
+				</div><br/>
+                <div class="mb-3">
+                    <input id="work" class="form-control" placeholder="Enter Work" formControlName="work"/>
+				</div><br/>
+                <div class="mb-3">
+                    <input id="email" class="form-control" placeholder="Email" formControlName="email"/>
+				</div><br/>
+                <div class="mb-3">
+                  
+					<input id="yearOfBirth" class="form-control" placeholder="Year Of Birth" formControlName="yob"/>
+				</div><br/>
+                <div class="mb-3">
+                    
+                    <input id="address" class="form-control" placeholder="Address" formControlName="address"/>
+				</div><br/>
+                <div class="mb-3">
+                    
+                    <input id="city" class="form-control" placeholder="City" formControlName="city"/>
+				
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Save</button>
+        <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('Cancle click')">Cancle</button>
+	</div>
+</ng-template>
+</div>
