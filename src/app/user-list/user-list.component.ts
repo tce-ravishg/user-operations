@@ -31,15 +31,7 @@ export class UserListComponent implements OnInit {
       city :['',Validators.required]
     })
   }
-//  async getUserData(){
-//   fetch('../../assets/userData.json')
-//   .then(res=> res.json())
-//   .then(jsonData =>{
-//     this.userData = jsonData
-//     console.log("jsonData-->",this.userData)
 
-//   })
-// }
 
 async getUserData(){
   const res:any = await this.http.get('../../assets/userData.json')
