@@ -32,12 +32,10 @@ export class UserListComponent implements OnInit {
     })
   }
 
-
 async getUserData(){
   const res:any = await this.http.get('../../assets/userData.json')
   .toPromise();
   console.log(res)
-  localStorage.setItem("users", JSON.stringify(res));
   this.users = res;
 }
 
@@ -47,13 +45,11 @@ open(content:any) {
   this.modal.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
     (result) => {
       this.closeResult = `Closed with: ${result}`;
-      console.log('save click')
       this.onUserUpdate();
       
     },
     (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      console.log('cancle click')
     },
   );
 }
@@ -90,25 +86,21 @@ this.userModelObj.address = this.formValue.value.address;
 this.userModelObj.city = this.formValue.value.city;
 
 console.log("this.userModelObj",this.userModelObj)
- this.localUsers= localStorage.getItem('users');
-var localusers = JSON.parse(this.localUsers);
-console.warn('localusers',localusers)
+this.localUsers= this.users;
 
-for (var i = 0; i < localusers.length; i++) {
-   if(this.userModelObj.id === localusers[i].id){  
-   localusers[i].name = this.userModelObj.name
-   localusers[i].work = this.userModelObj.work
-   localusers[i].email = this.userModelObj.email
-   localusers[i].yob = this.userModelObj.yob
-   localusers[i].address = this.userModelObj.address
-   localusers[i].city = this.userModelObj.city
-       break;
-  }else{
-    console.warn("not matched")
-  }
+
+for (var i = 0; i < this.localUsers.length; i++) {
+  if(this.userModelObj.id === this.localUsers[i].id){  
+    this.localUsers[i].name = this.userModelObj.name
+    this.localUsers[i].work = this.userModelObj.work
+    this.localUsers[i].email = this.userModelObj.email
+    this.localUsers[i].yob = this.userModelObj.yob
+    this.localUsers[i].address = this.userModelObj.address
+    this.localUsers[i].city = this.userModelObj.city
+      break;
+ }
 }
-localStorage.setItem("users", JSON.stringify(localusers));
- this.users = localusers;
+ this.users = this.localUsers;
 }
 
 
